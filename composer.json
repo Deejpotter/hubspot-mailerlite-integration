@@ -1,0 +1,28 @@
+{
+    "name": "maker-store/hubspot-mailerlite-integration",
+    "description": "This is a simple integration between HubSpot and MailerLite APIs.",
+    "type": "project",
+    "autoload": {
+        "psr-4": {
+            "MakerStore\\HubspotMailerliteIntegration\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Deej Potter",
+            "email": "deejpotter@gmail.com"
+        }
+    ],
+    "require": {
+        "vlucas/phpdotenv": "^5.6",
+        "hubspot/api-client": "^11.0",
+        "mailerlite/mailerlite-php": "^1.0",
+        "ext-curl": "*",
+        "ext-json": "*"
+    },
+    "config": {
+        "allow-plugins": {
+            "php-http/discovery": true
+        }
+    }
+}
