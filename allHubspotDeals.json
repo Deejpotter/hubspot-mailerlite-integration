@@ -1,0 +1,259 @@
+[
+  {
+    "paging": {
+      "next": {
+        "link": "https:\/\/api.hubapi.com\/crm\/v3\/objects\/deals?limit=10&archived=false&after=16486002460",
+        "after": "16486002460"
+      }
+    },
+    "results": [
+      {
+        "createdAt": "2023-06-08T03:52:46+00:00",
+        "archived": false,
+        "id": "13627190305",
+        "properties": {
+          "amount": "5200",
+          "closedate": "2023-06-30T03:50:41.126Z",
+          "createdate": "2023-06-08T03:52:46.351Z",
+          "dealname": "OutBack CNC Machine",
+          "dealstage": "appointmentscheduled",
+          "hs_lastmodifieddate": "2023-06-08T05:23:23.987Z",
+          "hs_object_id": "13627190305",
+          "pipeline": "default"
+        },
+        "updatedAt": "2023-06-08T05:23:23+00:00"
+      },
+      {
+        "createdAt": "2023-12-13T05:01:18+00:00",
+        "archived": false,
+        "id": "16485917453",
+        "properties": {
+          "amount": "22.50",
+          "closedate": "2023-12-13T05:01:18Z",
+          "createdate": "2023-12-13T05:01:18Z",
+          "dealname": "#143057 Quin Cao",
+          "dealstage": "135564338",
+          "hs_lastmodifieddate": "2023-12-13T21:15:21.749Z",
+          "hs_object_id": "16485917453",
+          "pipeline": "75e28846-ad0d-4be2-a027-5e1da6590b98"
+        },
+        "updatedAt": "2023-12-13T21:15:21+00:00"
+      },
+      {
+        "createdAt": "2023-12-13T09:16:58+00:00",
+        "archived": false,
+        "id": "16485929398",
+        "properties": {
+          "amount": "65.31",
+          "closedate": "2023-12-13T09:16:58Z",
+          "createdate": "2023-12-13T09:16:58Z",
+          "dealname": "#143065 isaac sutton",
+          "dealstage": "135564338",
+          "hs_lastmodifieddate": "2023-12-13T21:15:35.381Z",
+          "hs_object_id": "16485929398",
+          "pipeline": "75e28846-ad0d-4be2-a027-5e1da6590b98"
+        },
+        "updatedAt": "2023-12-13T21:15:35+00:00"
+      },
+      {
+        "createdAt": "2023-12-13T04:33:16+00:00",
+        "archived": false,
+        "id": "16485943703",
+        "properties": {
+          "amount": "28.70",
+          "closedate": "2023-12-13T04:33:16Z",
+          "createdate": "2023-12-13T04:33:16Z",
+          "dealname": "#143053 Chris Cunningham",
+          "dealstage": "135564338",
+          "hs_lastmodifieddate": "2023-12-19T20:10:41.232Z",
+          "hs_object_id": "16485943703",
+          "pipeline": "75e28846-ad0d-4be2-a027-5e1da6590b98"
+        },
+        "updatedAt": "2023-12-19T20:10:41+00:00"
+      },
+      {
+        "createdAt": "2023-12-13T10:34:09+00:00",
+        "archived": false,
+        "id": "16485953661",
+        "properties": {
+          "amount": "421.50",
+          "closedate": "2023-12-13T10:34:09Z",
+          "createdate": "2023-12-13T10:34:09Z",
+          "dealname": "#143067 Eugene Geldenhuys",
+          "dealstage": "135564338",
+          "hs_lastmodifieddate": "2023-12-13T21:16:12.234Z",
+          "hs_object_id": "16485953661",
+          "pipeline": "75e28846-ad0d-4be2-a027-5e1da6590b98"
+        },
+        "updatedAt": "2023-12-13T21:16:12+00:00"
+      },
+      {
+        "createdAt": "2023-12-13T05:37:20+00:00",
+        "archived": false,
+        "id": "16485954126",
+        "properties": {
+          "amount": "150.00",
+          "closedate": "2023-12-13T05:37:20Z",
+          "createdate": "2023-12-13T05:37:20Z",
+          "dealname": "#143058 Chris Noble",
+          "dealstage": "135564338",
+          "hs_lastmodifieddate": "2023-12-13T21:15:23.404Z",
+          "hs_object_id": "16485954126",
+          "pipeline": "75e28846-ad0d-4be2-a027-5e1da6590b98"
+        },
+        "updatedAt": "2023-12-13T21:15:23+00:00"
+      },
+      {
+        "createdAt": "2023-12-13T04:03:15+00:00",
+        "archived": false,
+        "id": "16485958163",
+        "properties": {
+          "amount": "40.80",
+          "closedate": "2023-12-13T04:03:15Z",
+          "createdate": "2023-12-13T04:03:15Z",
+          "dealname": "#143049 Paul Taylor",
+          "dealstage": "135564338",
+          "hs_lastmodifieddate": "2023-12-13T20:56:25.170Z",
+          "hs_object_id": "16485958163",
+          "pipeline": "75e28846-ad0d-4be2-a027-5e1da6590b98"
+        },
+        "updatedAt": "2023-12-13T20:56:25+00:00"
+      },
+      {
+        "createdAt": "2023-12-13T06:48:58+00:00",
+        "archived": false,
+        "id": "16485982596",
+        "properties": {
+          "amount": "137.96",
+          "closedate": "2023-12-13T06:48:58Z",
+          "createdate": "2023-12-13T06:48:58Z",
+          "dealname": "#143061 George Gruevski",
+          "dealstage": "135564338",
+          "hs_lastmodifieddate": "2023-12-14T23:44:04.740Z",
+          "hs_object_id": "16485982596",
+          "pipeline": "75e28846-ad0d-4be2-a027-5e1da6590b98"
+        },
+        "updatedAt": "2023-12-14T23:44:04+00:00"
+      },
+      {
+        "createdAt": "2023-12-13T05:46:51+00:00",
+        "archived": false,
+        "id": "16485998731",
+        "properties": {
+          "amount": "61.95",
+          "closedate": "2023-12-13T05:46:51Z",
+          "createdate": "2023-12-13T05:46:51Z",
+          "dealname": "#143059 Robert Volpe",
+          "dealstage": "135564338",
+          "hs_lastmodifieddate": "2023-12-13T21:15:25.240Z",
+          "hs_object_id": "16485998731",
+          "pipeline": "75e28846-ad0d-4be2-a027-5e1da6590b98"
+        },
+        "updatedAt": "2023-12-13T21:15:25+00:00"
+      },
+      {
+        "createdAt": "2023-12-13T06:11:32+00:00",
+        "archived": false,
+        "id": "16486002459",
+        "properties": {
+          "amount": "85.00",
+          "closedate": "2023-12-13T06:11:32Z",
+          "createdate": "2023-12-13T06:11:32Z",
+          "dealname": "#143060 Sonia Hankova",
+          "dealstage": "135564338",
+          "hs_lastmodifieddate": "2023-12-14T04:14:12.002Z",
+          "hs_object_id": "16486002459",
+          "pipeline": "75e28846-ad0d-4be2-a027-5e1da6590b98"
+        },
+        "updatedAt": "2023-12-14T04:14:12+00:00"
+      }
+    ]
+  },
+  200,
+  {
+    "Date": [
+      "Thu, 04 Apr 2024 06:20:04 GMT"
+    ],
+    "Content-Type": [
+      "application\/json;charset=utf-8"
+    ],
+    "Transfer-Encoding": [
+      "chunked"
+    ],
+    "Connection": [
+      "keep-alive"
+    ],
+    "CF-Ray": [
+      "86ef30bd9f382b34-MEL"
+    ],
+    "CF-Cache-Status": [
+      "DYNAMIC"
+    ],
+    "Strict-Transport-Security": [
+      "max-age=31536000; includeSubDomains; preload"
+    ],
+    "Vary": [
+      "origin"
+    ],
+    "Access-Control-Allow-Credentials": [
+      "false"
+    ],
+    "X-Content-Type-Options": [
+      "nosniff"
+    ],
+    "x-envoy-upstream-service-time": [
+      "93"
+    ],
+    "x-evy-trace-listener": [
+      "listener_https"
+    ],
+    "x-evy-trace-route-configuration": [
+      "listener_https\/all"
+    ],
+    "x-evy-trace-route-service-name": [
+      "envoyset-translator"
+    ],
+    "x-evy-trace-served-by-pod": [
+      "iad02\/hubapi-td\/envoy-proxy-697677dfc-44bjr"
+    ],
+    "x-evy-trace-virtual-host": [
+      "all"
+    ],
+    "X-HubSpot-Correlation-Id": [
+      "757e88e7-8d17-4751-8bc1-aa2b727df2f2"
+    ],
+    "X-HubSpot-RateLimit-Daily": [
+      "250000"
+    ],
+    "X-HubSpot-RateLimit-Daily-Remaining": [
+      "249961"
+    ],
+    "X-HubSpot-RateLimit-Interval-Milliseconds": [
+      "10000"
+    ],
+    "X-HubSpot-RateLimit-Max": [
+      "100"
+    ],
+    "X-HubSpot-RateLimit-Remaining": [
+      "98"
+    ],
+    "X-HubSpot-RateLimit-Secondly": [
+      "10"
+    ],
+    "X-HubSpot-RateLimit-Secondly-Remaining": [
+      "9"
+    ],
+    "x-request-id": [
+      "757e88e7-8d17-4751-8bc1-aa2b727df2f2"
+    ],
+    "Report-To": [
+      "{\"endpoints\":[{\"url\":\"https:\\\/\\\/a.nel.cloudflare.com\\\/report\\\/v4?s=FyrlMgUCyzfeJjQIzZIy345jaupjljUGolTFqbhiFRyjzS49b1%2FUFb9P3sAnGHjuP2ffkdJkso5vSrTSAUeRvIm9nHDrOaSrAmYpQxT9KvLAQBqiDumb3U%2FbpZpU%2Bi1u\"}],\"group\":\"cf-nel\",\"max_age\":604800}"
+    ],
+    "NEL": [
+      "{\"success_fraction\":0.01,\"report_to\":\"cf-nel\",\"max_age\":604800}"
+    ],
+    "Server": [
+      "cloudflare"
+    ]
+  }
+]

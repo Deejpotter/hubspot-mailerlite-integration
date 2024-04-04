@@ -13,7 +13,7 @@ use MailerLite\Exceptions\MailerLiteHttpException;
  * @return array|null The list of subscribers, or null if an error occurred.
  * @throws MailerLite\Exceptions\MailerLiteHttpException If an HTTP exception occurs.
  */
-function getMailerLiteSubscribers($mailerlite, int $limit = 10)
+function getMailerLiteSubscribers($mailerlite, int $limit = 10): ?array
 {
   try {
     // Get all subscribers from MailerLite
@@ -22,11 +22,11 @@ function getMailerLiteSubscribers($mailerlite, int $limit = 10)
         'limit' => $limit,
       ]
     );
-    // Output the subscribers to the console.
-    var_dump($mailerliteSubscribers);
 
     // Finally, return the subscribers.
     return $mailerliteSubscribers;
+
+    // Catch any exceptions if anything happens.
   } catch (MailerLiteHttpException $e) {
     // If an HTTP exception occurs (e.g., due to invalid API credentials),
     // print the error message and return null.
@@ -53,11 +53,11 @@ function createMailerLiteSubscriber($mailerlite, $email, $name)
         'name' => $name,
       ]
     );
-    // Output the new subscriber to the console.
-    var_dump($newSubscriber);
 
     // Finally, return the new subscriber.
     return $newSubscriber;
+
+    // Catch any exceptions if anything happens.
   } catch (MailerLiteHttpException $e) {
     // If an HTTP exception occurs (e.g., due to the email already being subscribed),
     // print the error message and return null.
