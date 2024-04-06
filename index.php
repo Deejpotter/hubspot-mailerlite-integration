@@ -27,7 +27,6 @@ The :: is the scope resolution operator, which is used to access static, constan
 We use that to access the createWithAccessToken() method of the HubSpot\Factory class and store the result in the $hubspot variable.
 */
 $hubspot = \HubSpot\Factory::createWithAccessToken($hubspotApiKey);
-
 // MailerLite uses the MailerLite\Client class to create a client instance.
 $mailerlite = new MailerLite(['api_key' => $mailerliteApiKey]);
 
@@ -37,22 +36,18 @@ $hubspotData = getHubSpotContactsWithHttp($hubspot);
 // Print the data from the hubspot and mailerlite to files.
 // file_put_contents() writes the data to a file using the specified filename and data.
 // I've used json_encode() to convert the data to JSON format before writing it to the file.
-file_put_contents('hubspot.json', json_encode($hubspotData));
+file_put_contents('files/hubspot.json', json_encode($hubspotData));
 
 // Now get the data from MailerLite
 $mlData = getMailerLiteSubscribers($mailerlite, 1);
-file_put_contents('mailerlite.json', json_encode($mlData));
+file_put_contents('files/mailerlite.json', json_encode($mlData));
 
-// Test the get all deals function.
+// Test the other functions and write the data to files.
 $hubspotDeals = getHubSpotDealsWithHttp($hubspot);
-file_put_contents('allHubspotDeals.json', json_encode($hubspotDeals));
-
-// Test the other hubspot objects.
-$hubspotCompanies = getLimitedHubSpotCompaniesWithHttp($hubspot, 1);
-file_put_contents('hubspotCompanies.json', json_encode($hubspotCompanies));
+file_put_contents('files/allHubspotDeals.json', json_encode($hubspotDeals));
 
 $hubspotDeals = getLimitedHubSpotDealsWithHttp($hubspot, 1);
-file_put_contents('hubspotDeals.json', json_encode($hubspotDeals));
+file_put_contents('files/hubspotDeals.json', json_encode($hubspotDeals));
 
 $hubspotQuotes = getLimitedHubSpotQuotesWithHttp($hubspot, 1);
-file_put_contents('hubspotQuotes.json', json_encode($hubspotQuotes));
+file_put_contents('files/hubspotQuotes.json', json_encode($hubspotQuotes));
