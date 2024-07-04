@@ -32,28 +32,5 @@ $hubspot = \HubSpot\Factory::createWithAccessToken($hubspotApiKey);
 $mailerlite = new MailerLite(['api_key' => $mailerliteApiKey]);
 
 // Now that we have the HubSpot and MailerLite clients, we can use them to interact with the respective APIs.
-$hubspotData = getHubSpotContactsWithHttp($hubspot);
-
-// Test the get all deals function.
-$hubspotDeals = getHubSpotDealsWithHttp($hubspot);
-file_put_contents('allHubspotDeals.json', json_encode($hubspotDeals));
-
-// Now get the data from MailerLite
-$mlData = getMailerLiteSubscribers($mailerlite, 1);
-
-// Test the other hubspot objects.
-$hubspotCompanies = getLimitedHubSpotCompaniesWithHttp($hubspot, 1);
-file_put_contents('hubspotCompanies.json', json_encode($hubspotCompanies));
-
-$hubspotDeals = getLimitedHubSpotDealsWithHttp($hubspot, 1);
-file_put_contents('hubspotDeals.json', json_encode($hubspotDeals));
-
-$hubspotQuotes = getLimitedHubSpotQuotesWithHttp($hubspot, 1);
-file_put_contents('hubspotQuotes.json', json_encode($hubspotQuotes));
-
-// Print the data from the hubspot and mailerlite to files.
-// file_put_contents() writes the data to a file using the specified filename and data.
-// I've used json_encode() to convert the data to JSON format before writing it to the file.
-file_put_contents('hubspot.json', json_encode($hubspotData));
-file_put_contents('mailerlite.json', json_encode($mlData));
-
+$hubspotData = getContactsAndDeals($hubspot);
+file_put_contents('hubspotData.json', json_encode($hubspotData, JSON_PRETTY_PRINT));

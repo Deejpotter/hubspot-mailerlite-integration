@@ -5,7 +5,37 @@ require_once 'vendor/autoload.php';
 // State that we are using the ApiException class from the HubSpot PHP client library.
 use HubSpot\Client\Crm\Contacts\ApiException;
 
-// Write a method to get HubSpot contacts using the basic method.
+/**
+ * Gets all contacts and associated deals from HubSpot.
+ */
+function getContactsAndDeals($hubspot)
+{
+  $contacts = getHubSpotContactsWithHttp($hubspot);
+  if (is_null($contacts)) {
+    return null; // Early return if fetching contacts failed
+  }
+
+  // Assuming $contacts is an array of contact objects
+  foreach ($contacts as $contact) {
+    // Assuming each contact object has an 'id' property
+    $contactId = $contact->id;
+    $dealIds = getAssociatedDealIds($hubspot, $contactId);
+
+    $deals = [];
+    foreach ($dealIds as $dealId) {
+      $dealDetails = getDealDetailsById($hubspot, $dealId);
+      if (!is_null($dealDetails)) {
+        $deals[] = $dealDetails;
+      }
+    }
+
+    // Add the deals to the contact object. This assumes you can add properties to the contact object.
+    // Adjust based on your actual data structure.
+    $contact->deals = $deals;
+  }
+
+  return $contacts;
+}
 
 /**
  * Get all HubSpot contacts using the HubSpot PHP client library.
@@ -16,8 +46,9 @@ use HubSpot\Client\Crm\Contacts\ApiException;
 function getHubSpotContactsWithHttp($hubspot)
 {
   try {
-    // Get all contacts from HubSpot
-    $hubspotContacts = $hubspot->crm()->contacts()->basicApi()->getPage();
+    // Assuming the correct method to fetch contacts is getAll() or similar.
+    // Replace 'getAll' with the actual method name if different.
+    $hubspotContacts = $hubspot->crm()->contacts()->basicApi()->getAll();
 
     // Finally, return the contacts.
     return $hubspotContacts;
@@ -33,6 +64,47 @@ function getHubSpotContactsWithHttp($hubspot)
     return null;
   }
 }
+
+/**
+ * Fetch associated deal IDs for a given HubSpot contact ID.
+ * @param \HubSpot\Client $hubspot The HubSpot client instance.
+ * @param string $contactId The ID of the contact.
+ * @return array The associated deal IDs, or an empty array if none found.
+ */
+function getAssociatedDealIds($hubspot, $contactId)
+{
+  try {
+    // Hypothetical method to fetch associations; replace with actual method
+    $associations = $hubspot->crm()->contacts()->associations($contactId, 'deal')->getAll();
+    $dealIds = [];
+    foreach ($associations as $association) {
+      $dealIds[] = $association->id; // Assuming 'id' is the property name
+    }
+    return $dealIds;
+  } catch (ApiException $e) {
+    echo "Error: " . $e->getMessage();
+    return [];
+  }
+}
+
+
+/**
+ * Fetch HubSpot deal details by deal ID.
+ * @param \HubSpot\Client $hubspot The HubSpot client instance.
+ * @param string $dealId The ID of the deal.
+ * @return array|null The deal details, or null if an error occurred.
+ */
+function getDealDetailsById($hubspot, $dealId)
+{
+  try {
+    $dealDetails = $hubspot->crm()->deals()->getById($dealId);
+    return $dealDetails;
+  } catch (ApiException $e) {
+    echo "Error: " . $e->getMessage();
+    return null;
+  }
+}
+
 
 /**
  * Get all HubSpot deals using the HubSpot PHP client library.
