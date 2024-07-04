@@ -1,5 +1,22 @@
 # HubSpot MailerLite Integration
 
+## Table of Contents
+
+- [Overview](#overview)
+- [Setup](#setup)
+- [Usage](#usage)
+- [Technical Details](#technical-details)
+  - [MailerLite API Overview](#mailerlite-api-overview)
+    - [Data Structure](#data-structure)
+    - [Key APIs](#key-apis)
+    - [Usage Example](#usage-example)
+  - [HubSpot API Overview](#hubspot-api-overview)
+    - [HubSpot Data Structure](#hubspot-data-structure)
+    - [HubSpot Key APIs](#hubspot-key-apis)
+    - [HubSpot Usage Example](#hubspot-usage-example)
+  - [Integration Logic](#integration-logic)
+  - [Considerations](#considerations)
+
 ## Overview
 
 This is a simple integration between HubSpot and MailerLite APIs.

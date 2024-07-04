@@ -165,38 +165,6 @@ function getLimitedHubSpotContactsWithHttp($hubspot, int $limit = 10): ?array
 }
 
 /**
- * Get HubSpot compaies with HTTP info using the HubSpot PHP client library.
- * Pass in the HubSpot client instance and the number of companies to retrieve.
- * @param \HubSpot\Client $hubspot The HubSpot client instance.
- * @param int $limit The number of companies to retrieve.
- * @return array|null The HubSpot companies with HTTP info, or null if an error occurred.
- */
-function getLimitedHubSpotCompaniesWithHttp($hubspot, int $limit = 10): ?array
-{
-  try {
-    // Get all companies from HubSpot
-    $hubspotCompanies = $hubspot->crm()->companies()->basicApi()->getPageWithHttpInfo(
-      [
-        'limit' => $limit,
-      ]
-    );
-
-    // Finally, return the companies.
-    return $hubspotCompanies;
-
-    // Catch the exceptions that may be thrown.
-  } catch (ApiException $e) {
-    // If an ApiException is thrown, print the error message and return null.
-    echo "Error: " . $e->getMessage();
-    return null;
-  } catch (InvalidArgumentException $e) {
-    // If an InvalidArgumentException is thrown, print the error message and return null.
-    echo "Error: " . $e->getMessage();
-    return null;
-  }
-}
-
-/**
  * Get HubSpot deals with HTTP info using the HubSpot PHP client library.
  * Pass in the HubSpot client instance and the number of deals to retrieve.
  * @param \HubSpot\Client $hubspot The HubSpot client instance.
