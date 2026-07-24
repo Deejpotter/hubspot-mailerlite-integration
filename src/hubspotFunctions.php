@@ -1,95 +1,78 @@
 <?php
 // Autoload vendor files using the Composer autoloader.
+// This line makes sure that all the necessary libraries and files are loaded automatically.
 require_once 'vendor/autoload.php';
 
-// State that we are using the ApiException class from the HubSpot PHP client library.
+// Use the ApiException class from the HubSpot PHP client library.
+// This class helps handle errors that might occur when interacting with the HubSpot API.
 use HubSpot\Client\Crm\Contacts\ApiException;
 
 /**
  * Gets all contacts and associated deals from HubSpot.
+ * This function fetches contacts and their related deals from HubSpot.
  */
 function getContactsAndDeals($hubspot)
 {
+  // Retrieve all HubSpot contacts using a helper function.
   $contacts = getHubSpotContactsWithHttp($hubspot);
   if (is_null($contacts)) {
-    return null; // Early return if fetching contacts failed
+    // If fetching contacts failed, return null early.
+    return null;
   }
 
-  // Assuming $contacts is an array of contact objects
+  // Loop through each contact to fetch their associated deals.
   foreach ($contacts as $contact) {
-    // Assuming each contact object has an 'id' property
-    $contactId = $contact->id;
-    $dealIds = getAssociatedDealIds($hubspot, $contactId);
+    // Get the contact's ID.
+    $contactId = $contact->getId();
+    // Retrieve associated deal IDs for the contact.
+    $dealIds = getHubSpotDealsWithHttp($hubspot);
 
     $deals = [];
+    // Loop through each deal ID to get the deal details.
     foreach ($dealIds as $dealId) {
       $dealDetails = getDealDetailsById($hubspot, $dealId);
       if (!is_null($dealDetails)) {
+        // Add the deal details to the deals array.
         $deals[] = $dealDetails;
       }
     }
 
-    // Add the deals to the contact object. This assumes you can add properties to the contact object.
-    // Adjust based on your actual data structure.
+    // Add the deals to the contact object.
     $contact->deals = $deals;
   }
 
+  // Return the contacts with their associated deals.
   return $contacts;
 }
 
 /**
  * Get all HubSpot contacts using the HubSpot PHP client library.
- * Pass in the HubSpot client instance.
+ * This function fetches all contacts from HubSpot.
  * @param \HubSpot\Client $hubspot The HubSpot client instance.
  * @return array|null The HubSpot contacts, or null if an error occurred.
  */
 function getHubSpotContactsWithHttp($hubspot)
 {
   try {
-    // Assuming the correct method to fetch contacts is getAll() or similar.
-    // Replace 'getAll' with the actual method name if different.
-    $hubspotContacts = $hubspot->crm()->contacts()->basicApi()->getAll();
+    // Fetch contacts with pagination.
+    $hubspotContacts = $hubspot->crm()->contacts()->basicApi()->getPage();
 
-    // Finally, return the contacts.
-    return $hubspotContacts;
-
-    // Catch the exceptions that may be thrown.
+    // Return the contacts.
+    return $hubspotContacts->getResults();
   } catch (ApiException $e) {
-    // If an ApiException is thrown, print the error message and return null.
+    // Handle any errors that occur during the API call.
     echo "Error: " . $e->getMessage();
     return null;
   } catch (InvalidArgumentException $e) {
-    // If an InvalidArgumentException is thrown, print the error message and return null.
+    // Handle any invalid arguments passed to the function.
     echo "Error: " . $e->getMessage();
     return null;
   }
 }
 
 /**
- * Fetch associated deal IDs for a given HubSpot contact ID.
- * @param \HubSpot\Client $hubspot The HubSpot client instance.
- * @param string $contactId The ID of the contact.
- * @return array The associated deal IDs, or an empty array if none found.
- */
-function getAssociatedDealIds($hubspot, $contactId)
-{
-  try {
-    // Hypothetical method to fetch associations; replace with actual method
-    $associations = $hubspot->crm()->contacts()->associations($contactId, 'deal')->getAll();
-    $dealIds = [];
-    foreach ($associations as $association) {
-      $dealIds[] = $association->id; // Assuming 'id' is the property name
-    }
-    return $dealIds;
-  } catch (ApiException $e) {
-    echo "Error: " . $e->getMessage();
-    return [];
-  }
-}
-
-
-/**
  * Fetch HubSpot deal details by deal ID.
+ * This function gets the details of a specific deal using its ID.
  * @param \HubSpot\Client $hubspot The HubSpot client instance.
  * @param string $dealId The ID of the deal.
  * @return array|null The deal details, or null if an error occurred.
@@ -97,36 +80,61 @@ function getAssociatedDealIds($hubspot, $contactId)
 function getDealDetailsById($hubspot, $dealId)
 {
   try {
-    $dealDetails = $hubspot->crm()->deals()->getById($dealId);
+    // Fetch the deal details by ID.
+    $dealDetails = $hubspot->crm()->deals()->basicApi()->getById($dealId);
     return $dealDetails;
   } catch (ApiException $e) {
+    // Handle any errors that occur during the API call.
     echo "Error: " . $e->getMessage();
     return null;
   }
 }
 
-
 /**
  * Get all HubSpot deals using the HubSpot PHP client library.
+ * This function fetches all deals from HubSpot.
  * @param \HubSpot\Client $hubspot The HubSpot client instance.
  * @return array|null The HubSpot deals, or null if an error occurred.
  */
 function getHubSpotDealsWithHttp($hubspot): ?array
 {
   try {
-    // Get all deals from HubSpot
-    $hubspotDeals = $hubspot->crm()->deals()->basicApi()->getPageWithHttpInfo();
+    // Get all deals from HubSpot.
+    $hubspotDeals = $hubspot->crm()->deals()->basicApi()->getPage();
 
-    // Finally, return the deals.
-    return $hubspotDeals;
-
-    // Catch the exceptions that may be thrown.
+    // Return the deals.
+    return $hubspotDeals->getResults();
   } catch (ApiException $e) {
-    // If an ApiException is thrown, print the error message and return null.
+    // Handle any errors that occur during the API call.
     echo "Error: " . $e->getMessage();
     return null;
   } catch (InvalidArgumentException $e) {
-    // If an InvalidArgumentException is thrown, print the error message and return null.
+    // Handle any invalid arguments passed to the function.
+    echo "Error: " . $e->getMessage();
+    return null;
+  }
+}
+
+/**
+ * Get a limited number of HubSpot deals using the HubSpot PHP client library.
+ * @param \HubSpot\Client $hubspot The HubSpot client instance.
+ * @param int $limit The number of deals to retrieve.
+ * @return array|null The HubSpot deals, or null if an error occurred.
+ */
+function getLimitedHubSpotDealsWithHttp($hubspot, int $limit = 10): ?array
+{
+  try {
+    // Get a limited number of deals from HubSpot.
+    $hubspotDeals = $hubspot->crm()->deals()->basicApi()->getPage($limit);
+
+    // Return the deals.
+    return $hubspotDeals->getResults();
+  } catch (ApiException $e) {
+    // Handle any errors that occur during the API call.
+    echo "Error: " . $e->getMessage();
+    return null;
+  } catch (InvalidArgumentException $e) {
+    // Handle any invalid arguments passed to the function.
     echo "Error: " . $e->getMessage();
     return null;
   }
@@ -134,7 +142,7 @@ function getHubSpotDealsWithHttp($hubspot): ?array
 
 /**
  * Get HubSpot contacts with HTTP info using the HubSpot PHP client library.
- * Pass in the HubSpot client instance and the number of contacts to retrieve.
+ * This function fetches a limited number of contacts from HubSpot.
  * @param \HubSpot\Client $hubspot The HubSpot client instance.
  * @param int $limit The number of contacts to retrieve.
  * @return array|null The HubSpot contacts with HTTP info, or null if an error occurred.
@@ -142,55 +150,17 @@ function getHubSpotDealsWithHttp($hubspot): ?array
 function getLimitedHubSpotContactsWithHttp($hubspot, int $limit = 10): ?array
 {
   try {
-    // Get all contacts from HubSpot
-    $hubspotContacts = $hubspot->crm()->contacts()->basicApi()->getPageWithHttpInfo(
-      [
-        'limit' => $limit,
-      ]
-    );
+    // Get a limited number of contacts from HubSpot.
+    $hubspotContacts = $hubspot->crm()->contacts()->basicApi()->getPage($limit);
 
-    // Finally, return the contacts.
-    return $hubspotContacts;
-
-    // Catch the exceptions that may be thrown.
+    // Return the contacts.
+    return $hubspotContacts->getResults();
   } catch (ApiException $e) {
-    // If an ApiException is thrown, print the error message and return null.
+    // Handle any errors that occur during the API call.
     echo "Error: " . $e->getMessage();
     return null;
   } catch (InvalidArgumentException $e) {
-    // If an InvalidArgumentException is thrown, print the error message and return null.
-    echo "Error: " . $e->getMessage();
-    return null;
-  }
-}
-
-/**
- * Get HubSpot deals with HTTP info using the HubSpot PHP client library.
- * Pass in the HubSpot client instance and the number of deals to retrieve.
- * @param \HubSpot\Client $hubspot The HubSpot client instance.
- * @param int $limit The number of deals to retrieve.
- * @return array|null The HubSpot deals with HTTP info, or null if an error occurred.
- */
-function getLimitedHubSpotDealsWithHttp($hubspot, int $limit = 10): ?array
-{
-  try {
-    // Get all deals from HubSpot
-    $hubspotDeals = $hubspot->crm()->deals()->basicApi()->getPageWithHttpInfo(
-      [
-        'limit' => $limit,
-      ]
-    );
-
-    // Finally, return the deals.
-    return $hubspotDeals;
-
-    // Catch the exceptions that may be thrown.
-  } catch (ApiException $e) {
-    // If an ApiException is thrown, print the error message and return null.
-    echo "Error: " . $e->getMessage();
-    return null;
-  } catch (InvalidArgumentException $e) {
-    // If an InvalidArgumentException is thrown, print the error message and return null.
+    // Handle any invalid arguments passed to the function.
     echo "Error: " . $e->getMessage();
     return null;
   }
@@ -276,3 +246,4 @@ function searchHubSpotContactByEmail($hubspot, string $searchTerm)
     return null;
   }
 }
+
